@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    
+    tools{
+        maven 'maven 3.9.8' 
+        }
+
+    stages {
+        stage("build"){
+            steps{
+                    echo "Compiling Worker App"
+                    dir('worker'){
+                        sh 'mvn compile'
+                    }
+                }
+            }
+            stage("test"){
+                steps{
+                    echo 'Running Unit Test on Worker App'
+                }
+            }
+            stage("package"){
+                steps{
+                    echo 'Packaging Worker App'
+                }
+            }
+        }
+
+        post{
+            always{
+                echo "Building MultiBranch Pipeline for Worker is Completed"
+            }
+        }
