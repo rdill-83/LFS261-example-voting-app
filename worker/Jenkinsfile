@@ -34,6 +34,9 @@ pipeline {
 
         post{
             always{
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+
                 echo "Building MultiBranch Pipeline for Worker is Completed"
             }
         }
+    }
